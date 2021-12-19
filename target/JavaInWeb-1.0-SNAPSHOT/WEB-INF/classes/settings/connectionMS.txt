@@ -1,0 +1,4 @@
+db.db_driver=com.microsoft.sqlserver.jdbc.SQLServerDriver
+db.url=jdbc:sqlserver://DESKTOP-GCBNIVU\\INS2014ENT;databaseName=testDb;integratedSecurity=true
+db.user=sqluser
+db.password=123
