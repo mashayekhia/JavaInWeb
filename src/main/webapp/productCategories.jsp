@@ -15,6 +15,7 @@
 </head>
 <body>
 <jsp:useBean id="productCategories" class="java.util.Optional" scope="request"/>
+<jsp:include page="newProductCategory.jsp" />
 <table border="1" style="border: 1px solid black">
     <thead style="border: 1px solid black">
     <tr>

@@ -8,6 +8,6 @@
 <h1><%="Home Page"%>
 </h1>
 <br/>
-<a href="productCategories">Product Category</a>
+<a href="secured/products">Products</a>
 </body>
 </html>

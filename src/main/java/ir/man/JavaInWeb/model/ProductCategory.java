@@ -2,11 +2,14 @@ package ir.man.JavaInWeb.model;
 
 import ir.man.JavaInWeb.model.builder.ProductCategoryBuilder;
 
-public class ProductCategory extends SharedMembers {
+public class ProductCategory {
 
     private Integer id;
     private String name;
     private String description;
+
+    public ProductCategory() {
+    }
 
     public ProductCategory(int id, String name, String description) {
         this.id = id;
@@ -23,7 +26,6 @@ public class ProductCategory extends SharedMembers {
         this.description = description;
     }
 
-    @Override
     public Integer getId() {
         return id;
     }

@@ -4,8 +4,10 @@ import ir.man.JavaInWeb.interfaces.IConnectionPool;
 import ir.man.JavaInWeb.interfaces.IDao;
 import ir.man.JavaInWeb.interfaces.implement.ConnectionPool;
 import ir.man.JavaInWeb.model.ProductCategory;
+import ir.man.JavaInWeb.model.builder.ProductCategoryBuilder;
 import sun.font.CreatedFontTracker;
 
+import java.io.PrintWriter;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +20,8 @@ public class ProductCategoryDAO implements IDao<ProductCategory> {
     private Connection connection;
     private Statement statement;
     private PreparedStatement preparedStatement;
+    ///////////////////////////////////////////////////////////
+    private long skip;
 
     public ProductCategoryDAO(IConnectionPool dbConnection) throws SQLException, ClassNotFoundException {
         this.dbConnection = (ConnectionPool) dbConnection;
@@ -31,8 +35,9 @@ public class ProductCategoryDAO implements IDao<ProductCategory> {
         ResultSet resultSet = statement.executeQuery("SELECT * FROM ProductCategory");
         List<ProductCategory> productCategories = new ArrayList<>();
         while (resultSet.next())
-            productCategories.add(new ProductCategory(resultSet.getInt("id")
-                    , resultSet.getString("name"), resultSet.getString("description")));
+            productCategories.add(ProductCategory.newBuilder().setId(resultSet.getInt("id")).
+                    setName(resultSet.getString("name"))
+                    .setDescription(resultSet.getString("description")).createProductCategory());
 
         return Optional.ofNullable(productCategories);
     }
@@ -43,8 +48,9 @@ public class ProductCategoryDAO implements IDao<ProductCategory> {
         preparedStatement.setInt(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next())
-            return Optional.of(new ProductCategory(resultSet.getInt("id"),
-                    resultSet.getString("name"), resultSet.getString("description")));
+            return Optional.of(ProductCategory.newBuilder().setId(resultSet.getInt("id")).
+                    setName(resultSet.getString("name"))
+                    .setDescription(resultSet.getString("description")).createProductCategory());
         return Optional.empty();
     }
 
